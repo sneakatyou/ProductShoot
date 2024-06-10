@@ -4,7 +4,7 @@ ProductShoot is a repository dedicated to generating images and videos for produ
 
 ## Mask Generation
 Use this notebook to generate image masks:
-[text](https://colab.research.google.com/github/shreyas-bk/U-2-Net-Demo/blob/master/DEMOS/U_2_Netp_Cropper_Colab.ipynb#scrollTo=CEDlFFvONi5g)
+[Generate Mask](https://colab.research.google.com/github/shreyas-bk/U-2-Net-Demo/blob/master/DEMOS/U_2_Netp_Cropper_Colab.ipynb#scrollTo=CEDlFFvONi5g)
 
 ## Usage
 
