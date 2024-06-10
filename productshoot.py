@@ -35,7 +35,7 @@ class ImageRepainter:
         ).to(device)
         self.generator = torch.Generator(device).manual_seed(seed)
 
-    def repaint_and_save(self, prompt, negative_prompt, init_image, mask_image, strength=1.0, guidance_scale=5.0):
+    def repaint_and_save(self, prompt, negative_prompt, init_image, mask_image, strength=1.0, guidance_scale=15.0):
         repainted_image = self.pipeline(prompt=prompt, negative_prompt=negative_prompt, image=init_image, mask_image=mask_image, generator=self.generator, strength=strength, guidance_scale=guidance_scale).images[0]
         # To remove any alteration of product from the generation
         unmasked_unchanged_image = self.pipeline.image_processor.apply_overlay(mask_image, init_image, repainted_image)
@@ -105,11 +105,11 @@ class ProductShootGenerator:
 
     def load_target_image(self, image_path, n, x):
         target_image = load_image(image_path)
-        black_image = Image.new('RGB', (512, 512), (0,0, 0))
+        white_image = Image.new('RGB', (512, 512), (255,255, 255)) 
         target_image = target_image.resize((target_image.width // n, target_image.height // n))
-        position = ((black_image.width - target_image.width) // x, (black_image.height - target_image.height) // x)
-        black_image.paste(target_image, position)
-        target_image = black_image
+        position = ((white_image.width - target_image.width) // x, (white_image.height - target_image.height) // x)
+        white_image.paste(target_image, position)
+        target_image = white_image
         return target_image
 
     def generate_product_image(self, init_image, mask_image,save_path):
